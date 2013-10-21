@@ -3,7 +3,7 @@ nodejs
 event loop
 scope
 callback
-cps
+cps(continuation-passing style)
 currying
 flow control
 
