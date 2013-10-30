@@ -22,3 +22,11 @@ notesdb.findNoteById(
         util.log('ROW: ' + util.inspect(row));
     }
 );
+
+notesdb.allNotes(function(error, rows) {
+    if (error) {
+        throw error;
+    } else {
+        util.log(util.inspect(rows));
+    }
+});
