@@ -86,7 +86,17 @@ exports.edit = function(ts, author, note, callback) {
 
 exports.allNotes = function(callback) {
     util.log(' in allNotes');
-    db.all('select * from notes', callback);
+    db.all(
+        'select * from notes',
+        function(err, rows) {
+            if (err) {
+                util.log('FAIL to retrieve rows' + err);
+                callback(err, null);
+            } else {
+                callback(null, rows);
+            }
+        }
+    );
 };
 
 exports.forAll = function(doEach, done) {
