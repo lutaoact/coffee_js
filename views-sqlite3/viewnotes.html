@@ -1,0 +1,29 @@
+<html>
+    <head><title><%= title %></title></head>
+    <body>
+        <h1><%= title %></h1>
+        <p><a href='/view'>View</a> | <a href='/add'>Add</a></p>
+        <table border=1>
+        <% notes.forEach(function(note) { %>
+            <tr>
+                <td>
+                    <p><%= new Date(note.ts).toString() %>: by <b><%= note.author %></b></p>
+                    <p><%= note.note %></p>
+                </td>
+                <td>
+                    <form method='GET' action='/del'>
+                        <input type='submit' value='Delete' />
+                        <input type='hidden' name='id' value='<%= note.ts %>' />
+                    </form>
+                </td>
+                <td>
+                    <form method='GET' action='/edit'>
+                        <input type='submit' value='Edit' />
+                        <input type='hidden' name='id' value='<%= note.ts %>' />
+                    </form>
+                </td>
+            </tr>
+        <% }); %>
+        </table>
+    </body>
+</html>
