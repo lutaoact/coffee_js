@@ -31,6 +31,7 @@ var req = http.request(options, function(res) {
         util.log('BODY: ' + chunk);
     });
     res.on('error', function(err) {
+        util.log('REQUEST ERROR: ' + err);
     });
 });
 
