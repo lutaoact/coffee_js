@@ -1,4 +1,5 @@
 testapp/
 npm-debug.log
-test.js
+/test.js
+/test.coffee
 /test2.json
