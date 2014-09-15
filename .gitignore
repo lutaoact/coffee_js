@@ -3,3 +3,5 @@ npm-debug.log
 /test.js
 /test.coffee
 /test2.json
+/node_modules
+/nohup.out
