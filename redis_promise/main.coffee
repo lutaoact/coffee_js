@@ -1,12 +1,10 @@
-TestModel = require './TestModel'
+RedisModel = require './RedisModel'
 
-test = new TestModel
-console.log test.client_pool.getName.toString()
+redisModel = new RedisModel
 
-test.asyncClient()
-.then (client) ->
-  console.log client
-  client.q.hget 'hhhhh', 'good'
+redisModel.set 'hello', 'world'
+.then () ->
+  redisModel.get 'hello'
 .then (reply) ->
   console.log reply
 , (err) ->

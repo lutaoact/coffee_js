@@ -35,4 +35,14 @@ class RedisModel
       m
     q
 
+  set: (key, value) ->
+    @asyncClient()
+    .then (client) ->
+      client.q.set key, value
+
+  get: (key) ->
+    @asyncClient()
+    .then (client) ->
+      client.q.get key
+
 module.exports = RedisModel
