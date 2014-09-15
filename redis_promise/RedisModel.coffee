@@ -1,26 +1,38 @@
-require '../common/init'
-generic_pool = require 'generic-pool'
-redis = require 'redis'
+_  = require 'lodash'
+Q = require 'q'
+pool = require './client_pool'
 
-port = 6379
-endpoint = 'localhost'
+class RedisModel
+  constructor: () ->
+    console.log 'RedisModel constructor'
 
-pool = generic_pool.Pool
-  name: 'redis'
-  create: (cb) ->
-    client = redis.createClient(port, endpoint)
-    cb null, client
-  destroy: (client) ->
-    client.quit()
-  max: 2
-  min: 1
-  idleTimeoutMills: 30000
+  client_pool: pool
 
-pool.acquireAsync = Q.nbind pool.acquire, pool
+  asyncClient: () ->
+    @client_pool.acquireAsync()
+    .then (client) =>
+      client.q = @getQPromiseOps client
+      client
 
-pool.acquireAsync()
-.then (client) ->
-  client.hget 'hhhhh', 'good', (err, reply) ->
-    console.log reply
-, (err) ->
-  console.log err
+  releaseClient: (client) ->
+    @client_pool.release client
+
+  getQPromiseOps: (client) ->
+    functions = _.functions client
+    ops = functions.filter (f) ->
+      return f.toUpperCase() is f
+
+    lc = (op.toLowerCase() for op in ops)
+    ops = ops.concat lc
+
+    q = {}
+    for op in ops
+      q[op] = Q.nbind client[op], client
+
+    q['multi'] = q['MULTI'] = () ->
+      m = client.multi.apply client, arguments
+      m.exec = Q.nbind m.exec, m
+      m
+    q
+
+module.exports = RedisModel
