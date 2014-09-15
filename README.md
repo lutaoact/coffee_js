@@ -1,4 +1,4 @@
 nodejs
 ======
-* node or coffee
+* js or coffee
 * app for exercise
