@@ -1,9 +1,12 @@
 EventEmitter = require('events').EventEmitter
 util = require 'util'
 
-Promise = () ->
-  EventEmitter.call @
-util.inherits Promise, EventEmitter
+#Promise = () ->
+#  EventEmitter.call @
+#  return
+#util.inherits Promise, EventEmitter
+#coffee风格的写法比js风格要简略太多了，就一行搞定
+class Promise extends EventEmitter
 
 Promise::then = (fulfilledHandler, errHandler, progressHandler) ->
   if typeof fulfilledHandler is 'function'
@@ -17,10 +20,15 @@ Promise::then = (fulfilledHandler, errHandler, progressHandler) ->
 
   return this
 
-Deferred = () ->
-  @state = 'unfulfilled'
-  @promise = new Promise()
-  return# you have to add this line if it's a constructor
+#Deferred = () ->
+#  @state = 'unfulfilled'
+#  @promise = new Promise()
+#  return# you have to add this line if it's a constructor
+class Deferred
+  constructor: () ->
+    console.log 'I am in Deferred constructor'
+    @state = 'unfulfilled'
+    @promise = new Promise()
 
 Deferred::resolve = (obj) ->
   @state = 'fulfilled'
