@@ -1,19 +1,37 @@
 EventEmitter = require('events').EventEmitter
 util = require 'util'
 
-Promise = ->
+Promise = () ->
   EventEmitter.call @
 util.inherits Promise, EventEmitter
 
-Promise.prototype.then = (fulfilledHandler, errHandler, progressHandler) ->
+Promise::then = (fulfilledHandler, errHandler, progressHandler) ->
   if typeof fulfilledHandler is 'function'
-    this.once 'success', fulfilledHandler
+    @once 'success', fulfilledHandler
 
   if typeof errHandler is 'function'
-    this.once 'error', errHandler
+    @once 'error', errHandler
 
   if typeof progressHandler is 'function'
-    this.once 'progress', progressHandler
+    @once 'progress', progressHandler
+
+  return this
+
+Deferred = () ->
+  @state = 'unfulfilled'
+  @promise = new Promise()
+
+Deferred::resolve = (obj) ->
+  @state = 'fulfilled'
+  @promise.emit 'success', obj
+
+Deferred::reject = (err) ->
+  @state = 'failed'
+  @promise.emit 'error', err
+
+Deferred::progress = (data) ->
+  @promise.emit 'progress', data
+
 ###
 util.inherits = function (ctor, superCtor) {
   ctor.super_ = superCtor;
