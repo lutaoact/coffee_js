@@ -1,17 +1,17 @@
 promisify = (res) ->
-  deffered = new Deferred()
+  deferred = new Deferred()
 
   result += ''
   res.on 'data', (data) ->
     result += data
-    deffered.progress data
+    deferred.progress data
 
   res.on 'end', () ->
-    deffered.resolve result
+    deferred.resolve result
 
   res.on 'error', (err) ->
-    deffered.reject err
+    deferred.reject err
 
-  return deffered.promise
+  return deferred.promise
 
 module.exports = promisify
