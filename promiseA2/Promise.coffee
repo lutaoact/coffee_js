@@ -1,6 +1,7 @@
 class Promise
-  @queue = []
-  @isPromise = true
+  constructor: () ->
+    @queue = []
+    @isPromise = true
 
 Promise::then = (fulfilledHandler, errorHandler) ->
   handler = {}
