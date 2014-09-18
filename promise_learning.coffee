@@ -13,16 +13,21 @@ fs = require 'fs'
 #.done (text) ->
 #  console.log text
 
-readFile = Q.nbind fs.readFile, fs
-readFile 'test.js', 'utf-8'
-.done (text) ->
-  console.log text
-
-#Q('hello')
-#.then (str) ->
-#  console.log str
-#, (err) ->
-#  console.log err
+#readFile = Q.nbind fs.readFile, fs
+#readFile 'test.js', 'utf-8'
+#.done (text) ->
+#  console.log text
+#
+Q('hello')
+.then (str) ->
+  console.log str
+.then (res) ->
+  console.log res
+  Q.resolve 'yyy'
+.then (res1) ->
+  console.log res1
+, (err) ->
+  console.log err
 
 #Q(readFile()).delay 1000
 #.then (data) ->
