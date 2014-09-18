@@ -2,8 +2,6 @@ var _ = require('underscore');
 var _s = require('underscore.string');
 var FileUtils = require('fileutils');
 var async = require('async');
-var region = process.env.NODE_ENV ? process.env.NODE_ENV.substr(0, 2) : 'cn';
-var textMap = require('../config/' + region + '/text');
 
 /*
  * @param  [String] key textMap中指定的key
