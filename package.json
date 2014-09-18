@@ -22,6 +22,7 @@
     "node-mysql": "^0.3.7",
     "q": "^1.0.1",
     "redis": "^0.12.1",
+    "rewire": "^2.1.0",
     "socket.io": "^1.0.6",
     "sqlite3": "^2.2.3",
     "supervisor": "^0.6.0",
