@@ -21,13 +21,23 @@ fs = require 'fs'
 Q('hello')
 .then (str) ->
   console.log str
+  return Q('good')
+  console.log 'after resolve'
 .then (res) ->
-  console.log res
-  Q.resolve 'yyy'
-.then (res1) ->
-  console.log res1
+  console.log "should be good: #{res}"
 , (err) ->
   console.log err
+
+#Q('hello')
+#.then (str) ->
+#  console.log str
+#.then (res) ->
+#  console.log res
+#  Q.resolve 'yyy'
+#.then (res1) ->
+#  console.log res1
+#, (err) ->
+#  console.log err
 
 #Q(readFile()).delay 1000
 #.then (data) ->
