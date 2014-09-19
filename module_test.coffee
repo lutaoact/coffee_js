@@ -15,3 +15,11 @@ console.log require.main
 console.log require.main.filename
 console.log require.main is module
 console.log module.parent
+
+exports = {}
+do (exports) ->
+#  exports = a:'b', c: 'd'
+  exports.a = 'b'
+
+module.exports = exports
+console.log module.exports
