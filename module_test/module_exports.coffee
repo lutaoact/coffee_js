@@ -10,3 +10,7 @@ do (exports) ->
   exports.a = 'b'
 
 console.log module.exports
+
+#module.exports被赋值，所以exports上设置的属性都无效
+be_required = require './be_required'
+console.log be_required
