@@ -1,6 +1,6 @@
 testapp/
 npm-debug.log
-/test.js
+/test.*
 /test.coffee
 /test2.json
 /node_modules
