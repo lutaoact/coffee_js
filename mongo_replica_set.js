@@ -1,6 +1,6 @@
 replicaSet = new ReplSetTest({nodes: 3});
 replicaSet.startSet(); replicaSet.initiate();
-db.getMongo().setSlaveOk();
+db.getMongo().setSlaveOk();//rs.slaveOk()
 
 conn1 = new Mongo("localhost:31000");
 primaryDB = conn1.getDB("test");
