@@ -1,7 +1,4 @@
 testapp/
 npm-debug.log
-/test.*
-/test.coffee
-/test2.json
 /node_modules
 /nohup.out
