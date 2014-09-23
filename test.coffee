@@ -1,3 +1,7 @@
-console.log (for i in [1..10]
-  i
-).concat [5, 6]
+require './common/init'
+data = [
+  name: 'hello'
+,
+  name: 'good'
+]
+console.log _.compact(_.pluck data, '_id').length
