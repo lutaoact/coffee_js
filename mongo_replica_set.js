@@ -14,3 +14,6 @@ primaryDB.isMaster();
 
 rs.stepDown(time) //让主节点退化为备份节点，以秒为单位，默认60s
 rs.freeze(time) //保持备份节点状态，以秒为单位
+
+db.adminCommand({replSetMaintenance: false})
+db.adminCommand({replSetGetStatus: 1}) //rs.status()
