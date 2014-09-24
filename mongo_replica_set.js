@@ -17,3 +17,12 @@ rs.freeze(time) //保持备份节点状态，以秒为单位
 
 db.adminCommand({replSetMaintenance: false})
 db.adminCommand({replSetGetStatus: 1}) //rs.status()
+db.adminCommand({replSetSyncFrom: 'localhost:31002'}) //连接到需要修改复制源的备份节点
+
+//db.eval(function, arguments)
+
+//db.runCommand({
+//  eval: <function>,
+//  args: [ <arg1>, <arg2> ... ],
+//  nolock: <boolean>
+//})
