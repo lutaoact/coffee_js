@@ -1,5 +1,7 @@
+//初始化测试副本集
 replicaSet = new ReplSetTest({nodes: 3});
 replicaSet.startSet(); replicaSet.initiate();
+
 db.getMongo().setSlaveOk();//rs.slaveOk()
 
 conn1 = new Mongo("localhost:31000");
