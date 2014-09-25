@@ -10,4 +10,9 @@ sh.enableSharding("test")
 db.users.ensureIndex({username: 1})
 sh.shardCollection("test.users", {username: 1})
 
+//mongos> MinKey
+//  { "$minKey" : 1 }
+//mongos> MaxKey
+//  { "$maxKey" : 1 }
+
 sh.status({verbose: 1})
