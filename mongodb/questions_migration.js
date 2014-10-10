@@ -1,3 +1,5 @@
+//run in mongo shell
+//> load("/path/to/questions_migration.js")
 var result = db.questions.update({}, {
   $rename: {
     "content.title"   : "body",
