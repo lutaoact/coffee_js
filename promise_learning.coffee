@@ -1,5 +1,20 @@
 Q = require 'q'
 fs = require 'fs'
+
+#用来测试如果前面的操作中任意一步reject，则直接跳至errHandler
+a = 4
+(if a isnt 4
+  Q.reject 'wrong'
+else
+  Q(4444)
+).then (value) ->
+  console.log value
+  return 5678
+.then (value) ->
+  console.log value
+, (err) ->
+  console.log err
+
 #readFile = (callback) ->
 #  deferred = do Q.defer
 #  fs.readFile 'test.js', 'utf-8', (err, data) ->
