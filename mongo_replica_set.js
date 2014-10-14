@@ -28,3 +28,4 @@ db.adminCommand({replSetSyncFrom: 'localhost:31002'}) //连接到需要修改复
 //  args: [ <arg1>, <arg2> ... ],
 //  nolock: <boolean>
 //})
+db.serverCmdLineOpts() //查看服务器的启动参数
