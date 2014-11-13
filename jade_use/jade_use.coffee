@@ -10,7 +10,7 @@ locals =
   initUser: 'webview'
   initNotify: 'webview'
 
-fn = jade.renderFile './hello.jade', locals
+html = jade.renderFile './hello2.jade', locals
 
-html = fn(locals)
+#html = fn(locals)
 console.log html
