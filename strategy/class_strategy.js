@@ -45,3 +45,29 @@ Greeter.prototype.greet = function() {
 
 var greeter = new Greeter(new GreetingStrategy());
 console.log(greeter.greet()); //=> 'Hello, Goodbye.'
+
+var PoliteGreetingStrategy = function() {};
+PoliteGreetingStrategy.prototype = Object.create(GreetingStrategy.prototype);
+PoliteGreetingStrategy.prototype.sayHi = function() {
+  return "Welcome sir, ";
+};
+
+var FriendlyGreetingStrategy = function() {};
+FriendlyGreetingStrategy.prototype = Object.create(GreetingStrategy.prototype);
+FriendlyGreetingStrategy.prototype.sayHi = function() {
+  return "Hey, ";
+};
+
+var BoredGreetingStrategy = function() {};
+BoredGreetingStrategy.prototype = Object.create(GreetingStrategy.prototype);
+BoredGreetingStrategy.prototype.sayHi = function() {
+  return "sup, ";
+};
+
+var politeGreeter   = new Greeter(new PoliteGreetingStrategy());
+var friendlyGreeter = new Greeter(new FriendlyGreetingStrategy());
+var boredGreeter    = new Greeter(new BoredGreetingStrategy());
+
+console.log(politeGreeter.greet());   //=> 'Welcome sir, Goodbye.'
+console.log(friendlyGreeter.greet()); //=> 'Hey, Goodbye.'
+console.log(boredGreeter.greet());    //=> 'sup, Goodbye.'
