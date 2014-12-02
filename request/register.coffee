@@ -1,7 +1,7 @@
 request = require('request').defaults({jar: true, followRedirect: false})
 
-email = "bb@bb.com"
-username = 'bb'
+email = "ee@ee.com"
+username = 'ee'
 password = "111111"
 passwordConfirm = "111111"
 
