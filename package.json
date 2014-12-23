@@ -37,7 +37,8 @@
     "supervisor": "^0.6.0",
     "tough-cookie": "^0.12.1",
     "underscore": "^1.6.0",
-    "underscore.string": "^2.3.3"
+    "underscore.string": "^2.3.3",
+    "wechat": "^1.2.1"
   },
   "devDependencies": {
     "mocha": "^1.20.0",
