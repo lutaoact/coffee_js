@@ -22,7 +22,7 @@
     "log4js": "^0.6.21",
     "memcached": "^0.2.8",
     "mongodb": "^1.4.5",
-    "mongoose": "^3.8.12",
+    "mongoose": "^3.8.21",
     "morgan": "^1.1.1",
     "nconf": "^0.6.9",
     "node-mysql": "^0.3.7",

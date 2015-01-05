@@ -3,6 +3,15 @@ express = require 'express'
 path = require 'path'
 logger = require('./logger').logger
 
+mongoose = require 'mongoose'
+mongoose.connect 'mongodb://localhost/wechat'
+Schema = mongoose.Schema
+
+messageSchema = new Schema
+  content: {}
+
+messageModel = mongoose.model 'message', messageSchema
+
 app = express()
 port = 80
 
@@ -17,6 +26,8 @@ app.get '/', (req, res) ->
 app.use '/wechat', wechat('xsdmyxtzzyyjsx', (req, res) ->
   message = req.weixin
   logger.info message
+  messageModel.create {content: message}, (err, doc) ->
+    console.log doc
 #  res.reply
 #    type: "image"
 #    content:
