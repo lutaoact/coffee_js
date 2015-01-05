@@ -31,7 +31,7 @@ app.use '/wechat', wechat('xsdmyxtzzyyjsx', (req, res) ->
 #    url: 'http://www.lutaoact.com/'
 #  ]
   if message.MsgType is 'text'
-    res.reply "你说啥？你说的是不是：#{message.Content}，我就知道你会说这个"
+    res.reply "你说啥？你说的是不是：#{message.Content}。我就知道你会这么说"
   else
     res.reply '你居然发图片了，我现在还不会处理图片，等我学会了再处理吧'
 )
