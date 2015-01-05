@@ -1,6 +1,7 @@
 wechat = require 'wechat'
 express = require 'express'
 path = require 'path'
+logger = require('./logger').logger
 
 app = express()
 port = 80
@@ -8,13 +9,14 @@ port = 80
 app.use(express.static(path.join(__dirname, 'public')))
 
 app.listen port
+logger.info "server listening on port #{port}..."
 
 app.get '/', (req, res) ->
   res.send hello: 'girlfriend'
 
 app.use '/wechat', wechat('xsdmyxtzzyyjsx', (req, res) ->
   message = req.weixin
-  console.log message
+  logger.info message
 #  res.reply
 #    type: "image"
 #    content:
@@ -29,7 +31,7 @@ app.use '/wechat', wechat('xsdmyxtzzyyjsx', (req, res) ->
 #    url: 'http://www.lutaoact.com/'
 #  ]
   if message.MsgType is 'text'
-    res.reply "你说啥？你说的是不是：#{message.Content}"
+    res.reply "你说啥？你说的是不是：#{message.Content}，我就知道你会说这个"
   else
     res.reply '你居然发图片了，我现在还不会处理图片，等我学会了再处理吧'
 )
