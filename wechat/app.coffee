@@ -2,6 +2,7 @@ wechat = require 'wechat'
 express = require 'express'
 path = require 'path'
 logger = require('./logger').logger
+config = require 'config'
 
 mongoose = require 'mongoose'
 mongoose.connect 'mongodb://localhost/wechat'
@@ -23,7 +24,10 @@ logger.info "server listening on port #{port}..."
 app.get '/', (req, res) ->
   res.send hello: 'girlfriend'
 
-app.use '/wechat', wechat('xsdmyxtzzyyjsx', (req, res) ->
+token = (req) ->
+  return config.wechatToken[req.headers.host]
+
+app.use '/wechat', wechat(token, (req, res) ->
   message = req.weixin
   logger.info message
   messageModel.create {content: message}, (err, doc) ->
