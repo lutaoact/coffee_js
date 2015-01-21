@@ -1,8 +1,10 @@
 request = require 'request'
 
+#开放平台请求用户信息的url
 url = 'https://api.weixin.qq.com/sns/userinfo?access_token=OezXcEiiBSKSxW0eoylIeCnaKHwusXk1Loei0ToP_Em5JvwIpPibblFaADeyiOxSydWiaUp6Xnsqmiqjz9kuG7n_UbWIh9nhvLoQbd8ulJwweRF8kB7Ec_Xk4b35K2lO5qrZ9mY6Px5c0HGBnb7jpg&openid=oEEPdjuKMXW2go6PXei-2hFD643Y'
 
 #token = 'tLFTp6mkrBHoh-RPSPdtDvwLpDiED_CSW6lytqccA4WLHpz-rBv38chs4MEXm87mf_dhzSvT9sZQwV4XreJI-_r_vW9hrtNLdpz2GSufpek'
+#公众号请求用户信息的url，需要公众号通过认证，获得相应的scope
 #https://api.weixin.qq.com/cgi-bin/user/info?access_token=ACCESS_TOKEN&openid=OPENID&lang=zh_CN
 request url, (err, res, body) ->
   obj = JSON.parse body
