@@ -21,6 +21,8 @@ request.get(url, (err, res, body) ->
     password: password
     'password-confirm': passwordConfirm
 
+# json - sets body but to JSON representation of value and adds Content-type: application/json header.
+# Additionally, parses the response body as JSON.
   request.post(url, {body: postBody, json: true}, (err, res, body) ->
     console.log err
     console.log body
