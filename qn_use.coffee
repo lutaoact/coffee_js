@@ -1,32 +1,32 @@
-_ = require 'lodash'
-#url = require 'url'
-#
-#u = url.parse '/pfop/'
-#path = u.path
-#console.log path
-#
+qn = require 'qn'
+fs = require 'fs'
+async = require 'async'
 
-qiniu = require 'qiniu'
-qiniu.conf.ACCESS_KEY = 'ZgraDo7E1x5ngVQQZFI_2CrcKTDnGNeMS8HDctYT'
-qiniu.conf.SECRET_KEY = 'eupT0QoatGxQFOvzyfUwvdIjuVEoD3A1dlWrQOME'
-#console.log qiniuUtil.urlsafeBase64Encode 'https://raw.githubusercontent.com/lutaoact/gale/master/local_data/L01-54/lesson01双语.srt'
-#console.log qiniuUtil.urlsafeBase64Encode 'https://raw.githubusercontent.com/lutaoact/gale/master/local_data/L01-54/lesson01%E5%8F%8C%E8%AF%AD.srt'
+client = qn.create(
+  accessKey: process.env.accessKey
+  secretKey: process.env.secretKey
+  bucket: 'windenglish',
+  domain: '7u2qm8.com1.z0.glb.clouddn.com',
+)
 
-#srtPath = 'https://raw.githubusercontent.com/lutaoact/gale/master/local_data/L01-54/lesson01双语.srt'
-srtPath = 'https://raw.githubusercontent.com/lutaoact/gale/master/local_data/L01-54/lesson01%E5%8F%8C%E8%AF%AD.srt'
-#postData = 'bucket=qiniu-ts-demo&key=sample.wav&fops=avthumb%2Fmp3%2Far%2F44100%2Faq%2F3&notifyURL=http%3A%2F%2Ffake.com%2Fqiniu%2Fnotify'
-subtitleUrl = qiniu.util.urlsafeBase64Encode srtPath
-#console.log subtitleUrl
-fops = encodeURIComponent "avthumb/mp4/subtitle/#{subtitleUrl}"
-postData =
-  bucket: 'wind'
-  key: encodeURIComponent 'videos/sample.mp4'
-  fops: fops
-postDataString = (_.map postData, (value, key) ->
-  return "#{key}=#{value}"
-).join '&'
-console.log postDataString
+dataPath = "/Users/lutao/Downloads/direct_english_lesson_list"
 
-urlPath = '/pfop/'
+uploadFile = (fileName, cb) ->
+  client.uploadFile "#{dataPath}/#{fileName}", {key: "de#{fileName}"}, (err, result) ->
+    return cb err if err
+    console.log result
+    cb()
 
-console.log qiniu.util.generateAccessToken('/pfop/', postDataString)
+fs.readdir dataPath, (err, files) ->
+  return console.log err if err
+  async.each files, (file, next) ->
+    if /.jpg/i.test file
+#      console.log file
+#      next()
+      uploadFile file, next
+    else
+      next()
+  , (err) ->
+    console.log err if err
+
+# accessKey=xxxxx secretKey=yyyyy coffee qn_use.coffee
