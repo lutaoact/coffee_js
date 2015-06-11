@@ -11,9 +11,20 @@ var knex = require('knex')({
 
 var bookshelf = require('bookshelf')(knex);
 
-var Weather = bookshelf.Model.extend({
-  tableName: 'weather',
-  hasTimestamps: ['createdAt', 'updatedAt'],
+//var Weather = bookshelf.Model.extend({
+//  tableName: 'weather',
+//  hasTimestamps: ['createdAt', 'updatedAt'],
+//});
+
+var Customer = bookshelf.Model.extend({
+  tableName: 'customer'
+});
+
+Customer.idAttribute = 'id';
+
+Customer.forge({item: 'value'}).save().then(function(doc) {
+  console.log(doc.get('item'));
+  console.log(doc.id);
 });
 
 //Weather.fetchAll().then(function(weathers) {
@@ -28,12 +39,15 @@ var Weather = bookshelf.Model.extend({
 //  console.log(weathers.toJSON());
 //});
 
-Weather.query(function(qb) {
-  qb.where('temp_lo', '>', 30).andWhere('temp_lo', '<', 40);
-}).fetchAll().then(function(weathers) {
-  console.log(weathers.toJSON());
-  console.log(weathers);
-});
+//Weather.query(function(qb) {
+//  qb.where('temp_lo', '>', 30).andWhere('temp_lo', '<', 40);
+//}).fetchAll().then(function(weathers) {
+//  console.log(weathers.toJSON());
+//  console.log(weathers);
+//});
+//
+//Weather.forge().save().then(function() {
+//});
 
 
 //var User = bookshelf.Model.extend({
