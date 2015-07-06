@@ -53,6 +53,7 @@
     "wechat": "^1.2.1"
   },
   "devDependencies": {
+    "json-schema-faker": "^0.1.12",
     "mocha": "^1.20.0",
     "sinon": "^1.10.2"
   },
