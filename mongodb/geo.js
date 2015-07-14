@@ -107,6 +107,7 @@ db.places.find( { loc :
    }
 }
 
+//$geoIntersects uses spherical geometry. $geoIntersects does not require a geospatial index. However, a geospatial index will improve query performance. Only the 2dsphere geospatial index supports $geoIntersects.
 {
   <location field>: {
      $geoIntersects: {
@@ -117,3 +118,23 @@ db.places.find( { loc :
      }
   }
 }
+
+
+//$near Specifies a point for which a geospatial query returns the documents from nearest to farthest. The $near operator can specify either a GeoJSON point or legacy coordinate point.
+//$near requires a geospatial index: 2dsphere index if specifying a GeoJSON point, 2d index if specifying a point using legacy coordinates.
+//When specifying a GeoJSON point, you can use the optional $minDistance and $maxDistance specifications to limit the $near results by distance in meters:
+{
+  $near: {
+     $geometry: {
+        type: "Point" ,
+        coordinates: [ <longitude> , <latitude> ]
+     },
+     $maxDistance: <distance in meters>,
+     $minDistance: <distance in meters>
+  }
+}
+{
+  $near: [ <x>, <y> ],
+  $maxDistance: <distance in radians>
+}
+//如果需要根据距离排序，则用$near，否则可以用$geoWithin代替，速度更快。sorts documents by distance. If you also include a sort() for the query, sort() re-orders the matching documents, effectively overriding the sort operation already performed by $near. When using sort() with geospatial queries, consider using $geoWithin operator, which does not sort documents, instead of $near.
