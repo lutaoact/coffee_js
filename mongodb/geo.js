@@ -1,6 +1,5 @@
-db.places.find(
-   { loc: { $geoWithin: { $center: [ [-74, 40.74], 10 ] } } }
-)
+//WGS84:World Geodetic System 1984，是为GPS全球定位系统使用而建立的坐标系统
+//EPSG:4326 4326 is just the EPSG identifier of WGS84
 
 // 2d索引
 // location range
@@ -27,7 +26,7 @@ db.places.find( { loc :
                      { $box : [ [ 0 , 0 ] ,
                                 [ 100 , 100 ] ]
                  } } } )
-//$center
+//$center: Only the 2d geospatial index supports $center.
 db.places.find( { loc: { $geoWithin :
                           { $center : [ [-74, 40.74 ] , 10 ]
                 } } } )
