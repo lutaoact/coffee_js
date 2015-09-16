@@ -33,6 +33,8 @@ For the shell, MongoDB provides a wrapper method db.collection.group(). However,
 * $limit 确定最大的文档传递个数。
 * $unwind 解构数组字段，并输出文档，包含所有字段，并会用数组的一个元素来代替之前的数组，所以一个输入文档，可能会产生多个输出文档
 * $group 注意与group命令和collection的group快捷操作区分开
+* $sort 在管道开始处时，可以用到索引
+* $out 指定输出的collection，必须是最后一个stage。无法写入到sharded collection和固定集合capped collection。会替换已有的collection
 */
 
 /** $group
@@ -46,3 +48,26 @@ $last Only meaningful when documents are in a defined order. 只在排序时有�
 $group stage有100M的内存限制。默认情况下，超过限制，将会引发错误。但可以通过设置allowDiskUse选项为true来使$group操作可写临时文件，以此来允许操作处理大数据集
 The $group stage has a limit of 100 megabytes of RAM. By default, if the stage exceeds this limit, $group will produce an error. However, to allow for the handling of large datasets, set the allowDiskUse option to true to enable $group operations to write to temporary files.
 */
+
+/*** Expression Operators表达式操作符 ***/
+/**
+ * 一般都通过数组提供参数，当接受单个参数时，可以省略外围的数组圈引
+ */
+
+/*** Boolean Operators布尔操作符 ***/
+/**
+ * 除了false之外，Boolean表达式会把null, 0, undefined也当false处理。注意：空字符串会当true。
+ */
+
+/*** Set Operators集合操作符 ***/
+/**
+ * $setEquals 集合相等
+ * $setIntersection 交集
+ * $setUnion 并集
+ * $setDifference 差集
+ * $setIsSubset A为B的子集
+ * $anyElementTrue 有任何一个元素为true
+ * $allElementsTrue 所有的元素为true
+ */
+
+/*** Comparison Operators比较操作符 ***/
