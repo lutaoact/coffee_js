@@ -71,3 +71,62 @@ The $group stage has a limit of 100 megabytes of RAM. By default, if the stage e
  */
 
 /*** Comparison Operators比较操作符 ***/
+/**
+ * $cmp
+ * $eq
+ * $gt
+ * $gte
+ * $lt
+ * $lte
+ * $ne
+ */
+
+/*** Arithmetic Operators比较操作符 ***/
+/**
+ * $add 为日期加上一个时间戳，可接受任意多个参数，但最多只能由一个参数可以被解析为日期对象
+ * $subtract 数字减数字得数字，日期减数字得日期，日期减日期得毫秒数
+ * $multiply
+ * $divide 执行浮点数除法
+ * $mod
+ */
+
+/*** String Operators字符串操作符 ***/
+/**
+ * $concat 如果一个参数解析为null或者指向不存在的字段，则返回null
+ * $substr 只对ASCII码的操作行为得到了良好规范
+ * $toLower null会返回空字符串
+ * $toUpper null会返回空字符串
+ * $strcasecmp 忽略大小写
+ */
+
+/*** Array Operators数组操作符 ***/
+/**
+ * $size 如果一个参数解析为null或者指向不存在的字段，则返回null
+ */
+
+/*** Variable Operators变量操作符 ***/
+/**
+ * $map 循环处理数组元素，并返回新的数组
+ * $let 重新设置变量，只在内部in子表达式中有效
+ */
+
+/*** Conditional Expressions条件表达式 ***/
+/**
+ * $cond 三元运算
+ * $ifNull 默认赋值
+ */
+
+/*** Date Operators条件表达式 ***/
+/**
+ * $dayOfYear 1-366
+ * $dayOfMonth 1-31
+ * $dayOfWeek 1(Sunday)-7(Saturday)
+ * $year
+ * $month 1-12
+ * $week between 0 (the partial week that precedes the first Sunday of the year) and 53 (leap year)
+ * $hour 0-23
+ * $minute 0-59
+ * $second 0-60(闰秒)
+ * $millisecond 0-999
+ * $dateToString 格式化输出
+ */

@@ -30,6 +30,26 @@ db.sales.aggregate(
       }
    ]
 );
+//日期操作
+db.sales.aggregate(
+   [
+     {
+       $project:
+         {
+           year: { $year: "$date" },
+           month: { $month: "$date" },
+           day: { $dayOfMonth: "$date" },
+           hour: { $hour: "$date" },
+           minutes: { $minute: "$date" },
+           seconds: { $second: "$date" },
+           milliseconds: { $millisecond: "$date" },
+           dayOfYear: { $dayOfYear: "$date" },
+           dayOfWeek: { $dayOfWeek: "$date" },
+           week: { $week: "$date" }
+         }
+     }
+   ]
+);
 
 db.books.save({ "_id" : 8751, "title" : "The Banquet", "author" : "Dante", "copies" : 2 });
 db.books.save({ "_id" : 8752, "title" : "Divine Comedy", "author" : "Dante", "copies" : 1 });
@@ -128,5 +148,37 @@ db.experiments.save({ "_id" : 9, "A" : [ ], "B" : [ "red" ] });
 db.experiments.aggregate(
    [
      { $project: { A:1, B: 1, AisSubset: { $setIsSubset: [ "$A", "$B" ] }, _id:0 } }
+   ]
+);
+
+/** $divide **/
+db.planning.save({ "_id" : 1, "name" : "A", "hours" : 80, "resources" : 7 });
+db.planning.save({ "_id" : 2, "name" : "B", "hours" : 40, "resources" : 4 });
+
+db.planning.aggregate(
+   [
+     { $project: { name: 1, workdays: { $divide: [ "$hours", 9 ] } } }
+   ]
+);
+
+/** $meta **/
+db.articles.save({ "_id" : 1, "title" : "cakes and ale" });
+db.articles.save({ "_id" : 2, "title" : "more cakes" });
+db.articles.save({ "_id" : 3, "title" : "bread" });
+db.articles.save({ "_id" : 4, "title" : "some cakes" });
+
+db.articles.createIndex( { title: "text" } );
+
+db.articles.aggregate(
+   [
+     { $match: { $text: { $search: "cake" } } },
+     { $sort: { score: { $meta: "textScore" } } },//根据评分排序
+     { $project: { title: 1, _id: 0, score: { $meta: "textScore" } } },//查看分数
+   ]
+);
+db.articles.aggregate(
+   [
+     { $match: { $text: { $search: "cake" } } },
+     { $group: { _id: { $meta: "textScore" }, count: { $sum: 1 } } }
    ]
 );
