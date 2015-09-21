@@ -182,3 +182,35 @@ db.articles.aggregate(
      { $group: { _id: { $meta: "textScore" }, count: { $sum: 1 } } }
    ]
 );
+
+db.grades.save({ "_id" : 3, "quizzes" : [ 3, 8, 9 ] });
+db.grades.save({ "_id" : 1, "quizzes" : [ 5, 6, 7 ] });
+
+//Using a simple $map:
+db.grades.aggregate([{
+  $project: {
+    adjustedGrades: {
+      $map: {
+        input: "$quizzes",
+        as: "grade",
+        in: { $add: [ "$$grade", 2 ] }
+      }
+    }
+  }
+}]);
+db.grades.aggregate([{
+  $project: {
+    adjustedGrades: {
+      $map: {
+        input: "$quizzes",
+        as: "grade",
+        in: {
+          $let: {
+            vars: { varin: "$$grade" },
+            in: { $add: [ "$$varin", 4 ] }
+          }
+        }
+      }
+    }
+  }
+}]);
