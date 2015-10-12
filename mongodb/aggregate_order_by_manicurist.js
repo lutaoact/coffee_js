@@ -1,4 +1,4 @@
-db.orders.aggregate([{
+var cursor = db.orders.aggregate([{
   $match: {
     manicurist: '0210001',
   },
@@ -23,3 +23,7 @@ db.orders.aggregate([{
 }, {
   $limit: 15
 }]);
+
+cursor.forEach(function(doc) {
+  printjson(doc);
+});
