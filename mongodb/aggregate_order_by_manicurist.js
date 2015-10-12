@@ -19,5 +19,7 @@ db.orders.aggregate([{
 }, {
   $sort: {count: -1},
 }, {
+  $skip: 10
+}, {
   $limit: 15
 }]);
