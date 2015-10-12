@@ -5,19 +5,19 @@ db.orders.aggregate([{
 }, {
   $group: {
     _id: '$cellphone',
-    count: {$sum: 1},
+    ordersCount: {$sum: 1},
     totalRealPrice: {$sum: '$real_price'},
   },
 }, {
   $project: {
     _id: 0,
     cellphone: '$_id',
-    count: 1,
+    ordersCount: 1,
     totalRealPrice: 1,
-    avgRealPrice: {$divide: ['$totalRealPrice', '$count']},
+    avgRealPrice: {$divide: ['$totalRealPrice', '$ordersCount']},
   },
 }, {
-  $sort: {count: -1},
+  $sort: {ordersCount: -1},
 }, {
   $skip: 10
 }, {
