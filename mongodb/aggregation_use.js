@@ -214,3 +214,14 @@ db.grades.aggregate([{
     }
   }
 }]);
+
+db.orders.aggregate([{
+  $group: {
+    _id: '$cellphone',
+    count: {$sum: 1}
+  },
+}, {
+  $sort: {count: -1}
+}, {
+  $limit: 10,
+}]);
