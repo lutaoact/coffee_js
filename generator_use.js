@@ -1,3 +1,5 @@
+'use strict';
+
 function* anotherGenerator(i) {
   yield i + 1;
   yield i + 2;
