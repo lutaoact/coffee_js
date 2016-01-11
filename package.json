@@ -9,6 +9,7 @@
     "benchmark": "^1.0.0",
     "body-parser": "^1.4.3",
     "bookshelf": "^0.8.1",
+    "bytes": "^2.2.0",
     "coffee-script": "^1.7.1",
     "config": "^1.10.0",
     "consolidate": "^0.10.0",
