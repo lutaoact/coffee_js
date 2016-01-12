@@ -24,11 +24,11 @@ function asyncFunc(num, cb) {
 gQueue(function* flow(next) {
   console.log('start');
 
-  var y = yield asyncFunc(10, next);
+  let y = yield asyncFunc(10, next);
 
   console.log('y is', y);
 
-  var z = yield asyncFunc(20, next);
+  let z = yield asyncFunc(20, next);
 
   console.log('z is', z);
   console.log('end');
