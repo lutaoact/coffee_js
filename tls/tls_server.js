@@ -7,11 +7,13 @@ const options = {
   key: fs.readFileSync('./server.key'),
   cert: fs.readFileSync('./server.crt'),
   requestCert: true,
-  ca: [fs.readFileSync('./ca.crt')]
+  ca: [fs.readFileSync('./ca.crt')],
+//  ca: [fs.readFileSync('./client.crt'), fs.readFileSync('./ca.crt')],
 };
 
 const server = tls.createServer(options, (socket) => {
   console.log(`server connected ${socket.authorized ? 'authorized' : 'unauthorized'}`);
+  socket.write('welcome\n');
   socket.setEncoding('utf8');
   socket.pipe(socket);
 });
