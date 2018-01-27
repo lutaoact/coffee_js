@@ -15,11 +15,15 @@ const server = tls.createServer(options, (socket) => {
   console.log(`server connected ${socket.authorized ? 'authorized' : 'unauthorized'}`);
   socket.write('welcome\n');
   socket.setEncoding('utf8');
-  socket.pipe(socket);
+//  socket.pipe(socket);
+  socket.on('data', (data) => {
+    console.log(data);
+    socket.write("ok:" + data.toString());
+  });
 });
 
 server.listen(8000, () => {
   console.log('tls server listenning on 127.0.0.1:8000...');
 });
 
-//openssl s_client -connect 127.0.0.1:8000
+//openssl s_client -connect lutao.me:8000 -CAfile ca.crt #指定自签名证书
