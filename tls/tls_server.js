@@ -8,7 +8,6 @@ const options = {
   cert: fs.readFileSync('./server.crt'),
   requestCert: true,
   ca: [fs.readFileSync('./ca.crt')],
-//  ca: [fs.readFileSync('./client.crt'), fs.readFileSync('./ca.crt')],
 };
 
 const server = tls.createServer(options, (socket) => {
@@ -26,4 +25,7 @@ server.listen(8000, () => {
   console.log('tls server listenning on 127.0.0.1:8000...');
 });
 
-//openssl s_client -connect lutao.me:8000 -CAfile ca.crt #指定自签名证书
+/*
+# 需要指定CA机构证书，表示我信任这个机构签发的证书
+openssl s_client -connect server.lutao.me:8000 -CAfile ca.crt
+*/

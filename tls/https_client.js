@@ -2,12 +2,12 @@ let https = require('https');
 let fs = require('fs');
 
 let options = {
-  hostname: 'lutao.me',
+  hostname: 'server.lutao.me',
   port: 8000,
   path: '/',
   method: 'GET',
-  key: fs.readFileSync('./client.key'),
-  cert: fs.readFileSync('./client.crt'),
+//  key: fs.readFileSync('./client.key'),
+//  cert: fs.readFileSync('./client.crt'),
   ca: [fs.readFileSync('./ca.crt')],
 };
 
